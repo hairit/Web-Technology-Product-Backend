@@ -7275,11 +7275,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+      "projectUniqueName": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
       "projectName": "Laptop-store-e-comerce",
-      "projectPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+      "projectPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
       "packagesPath": "C:\\Users\\TuongHai\\.nuget\\packages\\",
-      "outputPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
+      "outputPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\TuongHai\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7351,7 +7351,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

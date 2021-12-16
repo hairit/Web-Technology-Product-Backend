@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LRswviTDrVyTpx+DwV2dKkEkLK4uBexznoGbpf5rRBX5XKxzo7fd3KT9yiy49m1I9ugKNC5JyyjEEco047eedg==",
+  "dgSpecHash": "zdZ/wgL1zzFxq0Ri03Da9A2u3nO2hxPCES3jRq+/1x8HkrdxuD4b9qklmQqSIAga8dLLz/6Gj96eFS+zF2GvFA==",
   "success": true,
-  "projectFilePath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+  "projectFilePath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TuongHai\\.nuget\\packages\\bricelam.entityframeworkcore.pluralizer\\1.0.0\\bricelam.entityframeworkcore.pluralizer.1.0.0.nupkg.sha512",
     "C:\\Users\\TuongHai\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
