@@ -25,15 +25,25 @@ namespace Laptop_store_e_comerce.Controllers
             return await _context.Bills.Include(bill => bill.BillDetails).ToListAsync();
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bill>> GetDonHang(string id)
+        public async Task<ActionResult<List<Bill>>> GetBill(string id)
         {
-            var bill = await _context.Bills.Include(bill => bill.BillDetails)
-                                           .FirstOrDefaultAsync(bill => bill.Id == id);
-            if (bill == null)
+            List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                   .Where(bill => bill.Id == id).ToListAsync();
+            if (bills.Count == 0)
             {
                 return NotFound();
             }
-            return bill;
+            return bills;
+        }
+        [HttpGet("status={status}")]
+        public async Task<ActionResult<List<Bill>>> getBillsWithStatus(string status)
+        {
+            List<Bill> bills;
+            if(status != null)  bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                            .Where(bill => bill.Tinhtrang == status).ToListAsync();
+            else  bills = await _context.Bills.Include(bill => bill.IduserNavigation).ToListAsync();
+            if (bills.Count == 0) return NotFound();
+            else return bills;
         }
         [HttpGet("action={action}/{id}")]
         public async Task<ActionResult<Bill>> ActionBill(string action,string id)
@@ -120,10 +130,10 @@ namespace Laptop_store_e_comerce.Controllers
             catch (Exception) {
                 return BadRequest();
             }
-            return CreatedAtAction("GetDonHang", new { id = donHang.Id }, donHang);
+            return CreatedAtAction("GetBill", new { id = donHang.Id }, donHang);
         }
         [HttpPost]
-        public async Task<ActionResult<Bill>> PostDonHang(Bill donHang)
+        public async Task<ActionResult<Bill>> PostBill(Bill donHang)
         {
             if (DonHangExists(donHang.Id)) return Conflict();
             try{
@@ -133,7 +143,7 @@ namespace Laptop_store_e_comerce.Controllers
                 await _context.SaveChangesAsync();}
             catch (Exception)
             {throw;}
-            return CreatedAtAction("GetDonHang", new { id = donHang.Id }, donHang);
+            return CreatedAtAction("GetBill", new { id = donHang.Id }, donHang);
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Bill>> DeleteDonHang(string id)
