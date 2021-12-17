@@ -32,7 +32,7 @@ namespace Laptop_store_e_comerce.Controllers
                     else return bills;
                 }catch(Exception e) { return BadRequest(); }
         }
-        [HttpGet("bill/month={month}year={year}")]
+        [HttpGet("bill/month={month}/year={year}")]
         public async Task<ActionResult<List<Bill>>> getBillsByTime(int month,int year)
         {
             try
@@ -44,12 +44,12 @@ namespace Laptop_store_e_comerce.Controllers
             }
             catch (Exception e) { return BadRequest(); }
         }
-        [HttpGet("bill/year={year}")]
-        public async Task<ActionResult<List<Bill>>> getBillsByTime(int year)
+        [HttpGet("bill/year/{value}")]
+        public async Task<ActionResult<List<Bill>>> getBillsByTime(int value)
         {
             try
             {
-                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat.Year == year).ToListAsync();
+                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat.Year == value).ToListAsync();
                 if (bills.Count == 0) return NotFound();
                 else return bills;
             }

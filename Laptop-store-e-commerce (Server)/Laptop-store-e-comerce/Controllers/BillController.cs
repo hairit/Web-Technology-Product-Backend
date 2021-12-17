@@ -28,6 +28,7 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<List<Bill>>> GetBill(string id)
         {
             List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                    .Include(bill => bill.BillDetails)
                                                    .Where(bill => bill.Id == id).ToListAsync();
             if (bills.Count == 0)
             {
@@ -39,8 +40,9 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<List<Bill>>> getBillsWithStatus(string status)
         {
             List<Bill> bills;
-            if(status != null)  bills = await _context.Bills.Include(bill => bill.IduserNavigation)
-                                                            .Where(bill => bill.Tinhtrang == status).ToListAsync();
+            if(status != "all")  bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                              .Include(bill => bill.BillDetails)
+                                                             .Where(bill => bill.Tinhtrang == status).ToListAsync();
             else  bills = await _context.Bills.Include(bill => bill.IduserNavigation).ToListAsync();
             if (bills.Count == 0) return NotFound();
             else return bills;
@@ -52,7 +54,7 @@ namespace Laptop_store_e_comerce.Controllers
             if (bill == null) return NotFound();
             if(action == "accept")
             {
-                  bill.Tinhtrang = "Đã duyệt";
+                  bill.Tinhtrang = "Đã xác nhận";
                   try
                   {
                         _context.Entry(bill).State = EntityState.Modified;
