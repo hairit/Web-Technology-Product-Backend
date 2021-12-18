@@ -40,8 +40,8 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<List<Bill>>> GetBillsByIDCustomer(int idCustomer)
         {
             List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
-                                                    .Include(bill => bill.BillDetails)
-                                                    .Where(bill => bill.Iduser == idCustomer).ToListAsync();
+                                                   .Include(bill => bill.BillDetails)
+                                                   .Where(bill => bill.Iduser == idCustomer).ToListAsync();
             if (bills.Count == 0)
             {
                 return NotFound();
@@ -67,8 +67,9 @@ namespace Laptop_store_e_comerce.Controllers
         {
             List<Bill> bills;
             if(status != "all")  bills = await _context.Bills.Include(bill => bill.IduserNavigation)
-                                                              .Include(bill => bill.BillDetails)
+                                                             .Include(bill => bill.BillDetails)
                                                              .Where(bill => bill.Tinhtrang == status).ToListAsync();
+
             else  bills = await _context.Bills.Include(bill => bill.IduserNavigation).ToListAsync();
             if (bills.Count == 0) return NotFound();
             else return bills;

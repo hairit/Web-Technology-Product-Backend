@@ -38,7 +38,7 @@ namespace Laptop_store_e_comerce.Controllers
             try
             {
                 List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat.Month == month
-                        && bill.Ngaydat.Year == year ).ToListAsync();
+                        && bill.Ngaydat.Year == year && bill.Tinhtrang == "Đã hoàn thành").ToListAsync();
                 if (bills.Count == 0) return NotFound();
                 else return bills;
             }
@@ -49,7 +49,7 @@ namespace Laptop_store_e_comerce.Controllers
         {
             try
             {
-                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat.Year == value).ToListAsync();
+                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat.Year == value &&  bill.Tinhtrang == "Đã hoàn thành").ToListAsync();
                 if (bills.Count == 0) return NotFound();
                 else return bills;
             }
@@ -62,7 +62,7 @@ namespace Laptop_store_e_comerce.Controllers
             {
                 DateTime dateFrom = Convert.ToDateTime(from);
                 DateTime dateTo = Convert.ToDateTime(to);
-                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat >= dateFrom && bill.Ngaydat <= dateTo).ToListAsync();
+                List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat >= dateFrom && bill.Ngaydat <= dateTo && bill.Tinhtrang == "Đã hoàn thành").ToListAsync();
                 if (bills.Count == 0) return NotFound();
                 else return bills;
             }
