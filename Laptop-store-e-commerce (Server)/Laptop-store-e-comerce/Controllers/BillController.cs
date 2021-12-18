@@ -25,17 +25,43 @@ namespace Laptop_store_e_comerce.Controllers
             return await _context.Bills.Include(bill => bill.BillDetails).ToListAsync();
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Bill>>> GetBill(string id)
+        public async Task<ActionResult<List<Bill>>> GetBillsByID(string id)
         {
             List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
                                                     .Include(bill => bill.BillDetails)
-                                                   .Where(bill => bill.Id == id).ToListAsync();
+                                                    .Where(bill => bill.Id == id).ToListAsync();
             if (bills.Count == 0)
             {
                 return NotFound();
             }
             return bills;
         }
+        [HttpGet("idCustomer={idCustomer}")]
+        public async Task<ActionResult<List<Bill>>> GetBillsByIDCustomer(int idCustomer)
+        {
+            List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                    .Include(bill => bill.BillDetails)
+                                                    .Where(bill => bill.Iduser == idCustomer).ToListAsync();
+            if (bills.Count == 0)
+            {
+                return NotFound();
+            }
+            return bills;
+        }
+        [HttpGet("getbill/{id}")]
+        public async Task<ActionResult<Bill>> GetBill(string id)
+        {
+            var bill = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                    .Include(bill => bill.BillDetails)
+                                                   .FirstOrDefaultAsync(bill => bill.Id == id);
+            if (bill == null)
+            {
+                return NotFound();
+            }
+            return bill;
+        }
+       
+
         [HttpGet("status={status}")]
         public async Task<ActionResult<List<Bill>>> getBillsWithStatus(string status)
         {
@@ -46,6 +72,19 @@ namespace Laptop_store_e_comerce.Controllers
             else  bills = await _context.Bills.Include(bill => bill.IduserNavigation).ToListAsync();
             if (bills.Count == 0) return NotFound();
             else return bills;
+        }
+        [HttpGet("address={value}/{id}")]
+        public async Task<ActionResult> updateAddressBill(string value,string id)
+        {
+            try
+            {
+                var bill = await _context.Bills.FirstOrDefaultAsync(bill => bill.Id == id);
+                bill.Diachinhan = value;
+                _context.Entry(bill).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }catch (Exception) { return BadRequest(); }
+
         }
         [HttpGet("action={action}/{id}")]
         public async Task<ActionResult<Bill>> ActionBill(string action,string id)
@@ -62,6 +101,17 @@ namespace Laptop_store_e_comerce.Controllers
                         return NoContent();
                   }catch (Exception) { return BadRequest(); }
             }
+            if (action == "done")
+            {
+                bill.Tinhtrang = "Đã hoàn thành";
+                try
+                {
+                    _context.Entry(bill).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return NoContent();
+                }
+                catch (Exception) { return BadRequest(); }
+            }
             if (action == "cancel")
             {
                 try
@@ -72,6 +122,7 @@ namespace Laptop_store_e_comerce.Controllers
                     return NoContent();
                 } catch (Exception) { return BadRequest(); }
             }
+           
             return bill;
         }
         [HttpGet("action={action}/billdetail/idbill={value1}/idproduct={value2}")]
@@ -98,6 +149,7 @@ namespace Laptop_store_e_comerce.Controllers
             }
             if(action == "delete")
             {
+                bill.Tongtien -= billDetail.Tongtien;
                 _context.BillDetails.Remove(billDetail);
             }
             try
@@ -168,6 +220,11 @@ namespace Laptop_store_e_comerce.Controllers
         private bool DonHangExists(string id)
         {
             return _context.Bills.Any(e => e.Id == id);
+        }
+
+        private bool checkBillDetailExist(string id,string idProduct)
+        {
+            return _context.BillDetails.Any(detail => detail.IdBill == id && detail.IdProduct == idProduct);
         }
     }
 }

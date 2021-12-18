@@ -7,6 +7,12 @@ namespace Laptop_store_e_comerce.Models
 {
     public partial class Product
     {
+        public Product()
+        {
+            BillDetails = new HashSet<BillDetail>();
+            CartDetails = new HashSet<CartDetail>();
+        }
+
         public string Id { get; set; }
         public string Ten { get; set; }
         public int Gia { get; set; }
@@ -29,5 +35,7 @@ namespace Laptop_store_e_comerce.Models
         public virtual MouseDetail MouseDetail { get; set; }
         public virtual Pcdetail Pcdetail { get; set; }
         public virtual ScreenDetail ScreenDetail { get; set; }
+        public virtual ICollection<BillDetail> BillDetails { get; set; }
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }

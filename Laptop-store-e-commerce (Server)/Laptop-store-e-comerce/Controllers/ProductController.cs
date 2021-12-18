@@ -166,8 +166,9 @@ namespace Laptop_store_e_comerce.Controllers
                 return BadRequest();
             }
         }
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Product>> DeleteSanPham(string id)
+        /*public async Task<ActionResult<Product>> DeleteSanPham(string id)
         {
             var pro = await database.Products.FindAsync(id);
             if (pro == null)
@@ -205,7 +206,7 @@ namespace Laptop_store_e_comerce.Controllers
                 await database.SaveChangesAsync();
             }catch {  throw; }
             return pro;
-        }
+        }*/
         private bool existID(string id)
         {
             return database.Products.Any(e => e.Id == id);
