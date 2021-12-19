@@ -14,7 +14,6 @@ namespace Laptop_store_e_comerce.Controllers
     public class StatisticsController : ControllerBase
     {
         private readonly StoreContext database;
-
         public StatisticsController(StoreContext context)
         {
             database = context;
@@ -24,10 +23,10 @@ namespace Laptop_store_e_comerce.Controllers
         {
                 try {
                     DateTime date = Convert.ToDateTime(value);
-                int day = date.Day;
-                int month = date.Month;
-                int year = date.Year;
-                    List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat == date).ToListAsync();
+                    int day = date.Day;
+                    int month = date.Month;
+                    int year = date.Year;
+                    List<Bill> bills = await database.Bills.Where(bill => bill.Ngaydat == date && bill.Tinhtrang == "Đã hoàn thành").ToListAsync();
                     if (bills.Count == 0) return NotFound();
                     else return bills;
                 }catch(Exception e) { return BadRequest(); }

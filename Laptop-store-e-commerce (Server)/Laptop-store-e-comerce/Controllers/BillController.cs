@@ -52,16 +52,14 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<Bill>> GetBill(string id)
         {
             var bill = await _context.Bills.Include(bill => bill.IduserNavigation)
-                                                    .Include(bill => bill.BillDetails)
-                                                   .FirstOrDefaultAsync(bill => bill.Id == id);
+                                                    .Include(bill => bill.BillDetails).ThenInclude(bill => bill.IdProductNavigation)
+                                                   .FirstOrDefaultAsync(bill => bill.Id == id && bill.Tinhtrang == "Đã xác nhận");
             if (bill == null)
             {
                 return NotFound();
             }
             return bill;
         }
-       
-
         [HttpGet("status={status}")]
         public async Task<ActionResult<List<Bill>>> getBillsWithStatus(string status)
         {
@@ -104,12 +102,13 @@ namespace Laptop_store_e_comerce.Controllers
             }
             if (action == "done")
             {
+                if (bill.Tinhtrang != "Đã xác nhận") return BadRequest();
                 bill.Tinhtrang = "Đã hoàn thành";
                 try
                 {
-                    _context.Entry(bill).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
-                    return NoContent();
+                        _context.Entry(bill).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+                        return NoContent();
                 }
                 catch (Exception) { return BadRequest(); }
             }
@@ -123,7 +122,6 @@ namespace Laptop_store_e_comerce.Controllers
                     return NoContent();
                 } catch (Exception) { return BadRequest(); }
             }
-           
             return bill;
         }
         [HttpGet("action={action}/billdetail/idbill={value1}/idproduct={value2}")]
