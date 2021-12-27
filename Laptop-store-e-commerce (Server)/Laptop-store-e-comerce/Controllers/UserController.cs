@@ -21,7 +21,7 @@ namespace Laptop_store_e_comerce.Controllers
         {return await database.Users.ToListAsync();}
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserByID(int id)
+        public async Task<ActionResult<User>> GetUserByID1(int id)
         {
             var user = await database.Users.Include(user => user.CartDetails).Include(user => user.Bills).FirstOrDefaultAsync(user => user.Id == id);
             if (user == null)
@@ -40,18 +40,7 @@ namespace Laptop_store_e_comerce.Controllers
             }
             return users;
         }
-        [HttpGet("customer/id={id}")]
-        public async Task<ActionResult<List<User>>> GetCustomerByID(int id)
-        {
-            List<User> users = await database.Users.Include(user => user.CartDetails).Include(user => user.Bills).ThenInclude(user => user.BillDetails)
-                
-                .Where(user => user.Mode == "CUSTOMER" && user.Id == id).ToListAsync();
-            if (users.Count == 0)
-            {
-                return NotFound();
-            }
-            return users;
-        }
+        
         [HttpGet("name={value}")]
         public async Task<ActionResult<List<User>>> getUserByName(string value)
         {
@@ -105,6 +94,18 @@ namespace Laptop_store_e_comerce.Controllers
                 else return NotFound();
             } catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
         }
+        [HttpGet("sdt={value}")]
+      
+        public async Task<ActionResult<List<User>>> getUserBySdt(string value)
+        {
+            try
+            {
+                List<User> users = await database.Users.Where(user => user.Sdt == value).ToListAsync();
+                if (users.Count != 0) return users;
+                else return NotFound();
+            }
+            catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
+        }
         [HttpGet("customer/email={value}")]
         public async Task<ActionResult<List<User>>> getCustomerByEmail(string value)
         {
@@ -116,6 +117,18 @@ namespace Laptop_store_e_comerce.Controllers
             }
             catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
         }
+        [HttpGet("customer/id={value}")]
+        public async Task<ActionResult<List<User>>> getCustomerByID(int value)
+        {
+            try
+            {
+                List<User> users = await database.Users.Where(user => user.Mode == "CUSTOMER" && user.Id == value).ToListAsync();
+                if (users.Count != 0) return users;
+                else return NotFound();
+            }
+            catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
+        }
+
         [HttpGet("mode={value}")]
         public async Task<ActionResult<List<User>>> getUserByMode(string value)
         {

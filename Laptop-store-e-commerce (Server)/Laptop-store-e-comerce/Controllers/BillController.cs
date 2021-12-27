@@ -48,6 +48,18 @@ namespace Laptop_store_e_comerce.Controllers
             }
             return bills;
         }
+        [HttpGet("getbill/update/{id}")]
+        public async Task<ActionResult<Bill>> GetBillToUpdate(string id)
+        {
+            var bill = await _context.Bills.Include(bill => bill.IduserNavigation)
+                                                    .Include(bill => bill.BillDetails).ThenInclude(bill => bill.IdProductNavigation)
+                                                   .FirstOrDefaultAsync(bill => bill.Id == id);
+            if (bill == null)
+            {
+                return NotFound();
+            }
+            return bill;
+        }
         [HttpGet("getbill/{id}")]
         public async Task<ActionResult<Bill>> GetBill(string id)
         {
