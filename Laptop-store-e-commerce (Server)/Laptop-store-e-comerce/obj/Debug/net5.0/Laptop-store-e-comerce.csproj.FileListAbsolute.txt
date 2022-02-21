@@ -948,3 +948,4 @@ D:\Data\Môn\Web-Technology-Product-Backend\Web-Technology-Product-Backend\Lapto
 D:\Data\Môn\Web-Technology-Product-Backend\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net5.0\ref\Laptop-store-e-comerce.dll
 D:\Data\Môn\Web-Technology-Product-Backend\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net5.0\Laptop-store-e-comerce.pdb
 D:\Data\Môn\Web-Technology-Product-Backend\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net5.0\Laptop-store-e-comerce.genruntimeconfig.cache
+D:\Data\Môn\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net5.0\Laptop-store-e-comerce.StaticWebAssets.xml

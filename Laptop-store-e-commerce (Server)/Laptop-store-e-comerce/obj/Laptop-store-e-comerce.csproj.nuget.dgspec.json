@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj": {}
+    "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj": {}
   },
   "projects": {
-    "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj": {
+    "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+        "projectUniqueName": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
         "projectName": "Laptop-store-e-comerce",
-        "projectPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
-        "packagesPath": "C:\\Users\\TuongHai\\.nuget\\packages\\",
-        "outputPath": "D:\\Data\\Môn\\Web-Technology-Product-Backend\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
+        "projectPath": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+        "packagesPath": "C:\\Users\\tuong\\.nuget\\packages\\",
+        "outputPath": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\TuongHai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -37,8 +37,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Bricelam.EntityFrameworkCore.Pluralizer": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

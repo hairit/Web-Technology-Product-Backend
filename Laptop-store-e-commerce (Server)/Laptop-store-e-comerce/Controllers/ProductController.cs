@@ -32,19 +32,19 @@ namespace Laptop_store_e_comerce.Controllers
             else return pro;
         }
         [HttpGet("type={type}/{id}")]
-        public async Task<ActionResult<Product>> getProductByID(string type,string id)
+        public async Task<ActionResult<Product>> getProductByID(string type, string id)
         {
             if (!existType(type)) return NotFound();
             Product pro = null;
-            if(type =="laptop")  pro = await database.Products.Include(pro => pro.IdloaiNavigation)
-                                                              .Include(pro => pro.LaptopDetail)
-                                                              .Include(pro => pro.LaptopDescription)
-                                                              .Where(pro => pro.Id == id)
-                                                              .FirstOrDefaultAsync();
-            if(type =="keyboard") pro = await database.Products.Include(pro => pro.IdloaiNavigation)
-                                                               .Include(pro => pro.KeyboardDetail)
+            if (type == "laptop") pro = await database.Products.Include(pro => pro.IdloaiNavigation)
+                                                               .Include(pro => pro.LaptopDetail)
+                                                               .Include(pro => pro.LaptopDescription)
                                                                .Where(pro => pro.Id == id)
                                                                .FirstOrDefaultAsync();
+            if (type == "keyboard") pro = await database.Products.Include(pro => pro.IdloaiNavigation)
+                                                                 .Include(pro => pro.KeyboardDetail)
+                                                                 .Where(pro => pro.Id == id)
+                                                                 .FirstOrDefaultAsync();
             if (type == "screen") pro = await database.Products.Include(pro => pro.IdloaiNavigation)
                                                                .Include(pro => pro.ScreenDetail)
                                                                .Where(pro => pro.Id == id)
@@ -90,6 +90,17 @@ namespace Laptop_store_e_comerce.Controllers
             {
                 List<Product> pros = await database.Products.Where(pro => pro.Idloai == type).ToListAsync();
                 if (pros.Count != 0) return pros;
+                else return NotFound();
+            }
+            catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
+        }
+        [HttpGet("all")]
+        public async Task<ActionResult<List<Product>>> getProductsAllDisplay(string type)
+        {
+            try
+            {
+                List<Product> pros = await database.Products.Where(pro => pro.Hienthi == 1).ToListAsync();
+                if (pros.Count > 0) return pros;
                 else return NotFound();
             }
             catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }

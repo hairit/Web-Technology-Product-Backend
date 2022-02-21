@@ -23,7 +23,10 @@ namespace Laptop_store_e_comerce.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserByID1(int id)
         {
-            var user = await database.Users.Include(user => user.CartDetails).Include(user => user.Bills).FirstOrDefaultAsync(user => user.Id == id);
+            var user = await database.Users.Include(user => user.CartDetails)
+                                .ThenInclude(cart => cart.IdProductNavigation)
+                                .ThenInclude(pro => pro.IdloaiNavigation)
+                        .Include(user => user.Bills).FirstOrDefaultAsync(user => user.Id == id);
             if (user == null)
             {
                 return NotFound();
