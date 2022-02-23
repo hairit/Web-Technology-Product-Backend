@@ -143,7 +143,6 @@ D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Laptop-store-e-comerce.deps.json
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Laptop-store-e-comerce.runtimeconfig.json
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Laptop-store-e-comerce.dll
-D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\ref\Laptop-store-e-comerce.dll
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Laptop-store-e-comerce.pdb
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Bricelam.EntityFrameworkCore.Pluralizer.dll
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\bin\Debug\net6.0\Humanizer.dll
@@ -276,3 +275,4 @@ D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net6.0\ref\Laptop-store-e-comerce.dll
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net6.0\Laptop-store-e-comerce.pdb
 D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net6.0\Laptop-store-e-comerce.genruntimeconfig.cache
+D:\Data\Project\Web-Technology-Product-Backend\Laptop-store-e-commerce (Server)\Laptop-store-e-comerce\obj\Debug\net6.0\refint\Laptop-store-e-comerce.dll

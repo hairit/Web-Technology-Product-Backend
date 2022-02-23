@@ -79,7 +79,8 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<User>> Login(string email, string pass)
         {
             var user = await database.Users.Include(user => user.Bills).ThenInclude(bill => bill.BillDetails)
-                                           .Include(user => user.CartDetails)
+                                           .Include(user => user.CartDetails).ThenInclude(cart => cart.IdProductNavigation)
+                                                                             .ThenInclude(cart => cart.IdloaiNavigation)
                                            .FirstOrDefaultAsync(a => a.Email == email);
             if (user != null)
             {
@@ -98,7 +99,6 @@ namespace Laptop_store_e_comerce.Controllers
             } catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
         }
         [HttpGet("sdt={value}")]
-      
         public async Task<ActionResult<List<User>>> getUserBySdt(string value)
         {
             try

@@ -39,7 +39,9 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<List<CartDetail>>> getCardDetailsByUser(int id)
         {
             if (!_context.Users.Any(user => user.Id == id)) return BadRequest();
-            List<CartDetail> listCardDetails= await _context.CartDetails.Where(cardDetail => cardDetail.IdUser == id)
+            List<CartDetail> listCardDetails= await _context.CartDetails.Include(cart => cart.IdProductNavigation)
+                                                                        .ThenInclude(pro => pro.IdloaiNavigation)
+                                                                        .Where(cardDetail => cardDetail.IdUser == id)
                                                                         .ToListAsync();
             if (listCardDetails.Count == 0) return NotFound();
             else return listCardDetails;
