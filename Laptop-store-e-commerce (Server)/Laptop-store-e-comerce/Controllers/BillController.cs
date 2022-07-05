@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Laptop_store_e_comerce.Models;
+using Laptop_store_e_comerce.Repository;
+using Laptop_store_e_comerce.Services;
 
 namespace Laptop_store_e_comerce.Controllers
 {
@@ -14,10 +16,13 @@ namespace Laptop_store_e_comerce.Controllers
     public class BillController : ControllerBase
     {
         private readonly StoreContext _context;
-
+        private BillRepository billRepository;
+        private BillService billService;
         public BillController(StoreContext context)
         {
             _context = context;
+            this.billRepository = new BillRepository(context);
+            this.billService = new BillService(billRepository);
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bill>>> GetDonHangs()
@@ -27,7 +32,7 @@ namespace Laptop_store_e_comerce.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List<Bill>>> GetBillsByID(string id)
         {
-            List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+            List<Bill> bills = await _context.Bills.Include(bill => bill.IdUserNavigation)
                                                     .Include(bill => bill.BillDetails)
                                                     .Where(bill => bill.Id == id).ToListAsync();
             if (bills.Count == 0)
@@ -36,22 +41,31 @@ namespace Laptop_store_e_comerce.Controllers
             }
             return bills;
         }
+        //[httpget("idcustomer={idcustomer}")]
+        //public async task<actionresult<list<bill>>> getbillsbyidcustomer(string idcustomer)
+        //{
+        //    list<bill> bills = await _context.bills.include(bill => bill.idusernavigation)
+        //                                           .include(bill => bill.billdetails)
+        //                                           .where(bill => bill.iduser == idcustomer).tolistasync();
+        //    if (bills.count == 0)
+        //    {
+        //        return notfound();
+        //    }
+        //    return bills;
+        //}
         [HttpGet("idCustomer={idCustomer}")]
-        public async Task<ActionResult<List<Bill>>> GetBillsByIDCustomer(int idCustomer)
+        public async Task<ActionResult<List<Bill>>> getBillsByIdCustomer(string idCustomer)
         {
-            List<Bill> bills = await _context.Bills.Include(bill => bill.IduserNavigation)
-                                                   .Include(bill => bill.BillDetails)
-                                                   .Where(bill => bill.Iduser == idCustomer).ToListAsync();
-            if (bills.Count == 0)
-            {
-                return NotFound();
-            }
-            return bills;
+            if (idCustomer == null) return BadRequest();
+            var bills = await billService.getBillsByIduser(idCustomer);
+            if (bills.Value.Count == 0) return NotFound();
+            else return bills.Value;
         }
+
         [HttpGet("getbill/update/{id}")]
         public async Task<ActionResult<Bill>> GetBillToUpdate(string id)
         {
-            var bill = await _context.Bills.Include(bill => bill.IduserNavigation)
+            var bill = await _context.Bills.Include(bill => bill.IdUserNavigation)
                                                     .Include(bill => bill.BillDetails).ThenInclude(bill => bill.IdProductNavigation)
                                                    .FirstOrDefaultAsync(bill => bill.Id == id);
             if (bill == null)
@@ -63,7 +77,7 @@ namespace Laptop_store_e_comerce.Controllers
         [HttpGet("getbill/{id}")]
         public async Task<ActionResult<Bill>> GetBill(string id)
         {
-            var bill = await _context.Bills.Include(bill => bill.IduserNavigation)
+            var bill = await _context.Bills.Include(bill => bill.IdUserNavigation)
                                                     .Include(bill => bill.BillDetails).ThenInclude(bill => bill.IdProductNavigation)
                                                    .FirstOrDefaultAsync(bill => bill.Id == id && bill.Tinhtrang == "Đã xác nhận");
             if (bill == null)
@@ -76,11 +90,11 @@ namespace Laptop_store_e_comerce.Controllers
         public async Task<ActionResult<List<Bill>>> getBillsWithStatus(string status)
         {
             List<Bill> bills;
-            if(status != "all")  bills = await _context.Bills.Include(bill => bill.IduserNavigation)
+            if(status != "all")  bills = await _context.Bills.Include(bill => bill.IdUserNavigation)
                                                              .Include(bill => bill.BillDetails)
                                                              .Where(bill => bill.Tinhtrang == status).ToListAsync();
 
-            else  bills = await _context.Bills.Include(bill => bill.IduserNavigation).ToListAsync();
+            else  bills = await _context.Bills.Include(bill => bill.IdUserNavigation).ToListAsync();
             if (bills.Count == 0) return NotFound();
             else return bills;
         }
@@ -172,10 +186,10 @@ namespace Laptop_store_e_comerce.Controllers
             return NoContent();
         }
         [HttpGet("iduser={id}")]
-        public async Task<ActionResult<List<Bill>>> getBillsByUserID(int id)
+        public async Task<ActionResult<List<Bill>>> getBillsByUserID(string id)
         {
             if (!_context.Users.Any(user => user.Id == id)) return BadRequest();
-            List<Bill> bills = await _context.Bills.Include(bill => bill.BillDetails).Include(bill => bill.IduserNavigation).Where(bill => bill.Iduser == id).ToListAsync();
+            List<Bill> bills = await _context.Bills.Include(bill => bill.BillDetails).Include(bill => bill.IdUserNavigation).Where(bill => bill.IdUser == id).ToListAsync();
             if (bills.Count == 0) return NotFound();
             else return bills;
         }
@@ -203,7 +217,7 @@ namespace Laptop_store_e_comerce.Controllers
             if (DonHangExists(donHang.Id)) return Conflict();
             try{
                 _context.Bills.Add(donHang);
-                var cartOrders = await _context.CartDetails.Where(detail => detail.IdUser == donHang.Iduser && detail.Selected == 1).ToListAsync();
+                var cartOrders = await _context.CartDetails.Where(detail => detail.IdUser == donHang.IdUser && detail.Selected == 1).ToListAsync();
                 _context.CartDetails.RemoveRange(cartOrders);
                 await _context.SaveChangesAsync();}
             catch (Exception)

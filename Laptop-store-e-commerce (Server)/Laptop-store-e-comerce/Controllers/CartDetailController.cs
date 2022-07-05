@@ -25,7 +25,7 @@ namespace Laptop_store_e_comerce.Controllers
             return await _context.CartDetails.ToListAsync();
         }
         [HttpGet("iduser={value1}/idproduct={value2}")]
-        public async Task<ActionResult<CartDetail>> GetCardDetail(int value1 , string value2)
+        public async Task<ActionResult<CartDetail>> GetCardDetail(string value1 , string value2)
         {
             var cartDetail = await _context.CartDetails.Where(detail => detail.IdUser == value1 && detail.IdProduct == value2)
                                                        .FirstOrDefaultAsync();      
@@ -36,7 +36,7 @@ namespace Laptop_store_e_comerce.Controllers
             return cartDetail;
         }
         [HttpGet("iduser={id}")]
-        public async Task<ActionResult<List<CartDetail>>> getCardDetailsByUser(int id)
+        public async Task<ActionResult<List<CartDetail>>> getCardDetailsByUser(string id)
         {
             if (!_context.Users.Any(user => user.Id == id)) return BadRequest();
             List<CartDetail> listCardDetails= await _context.CartDetails.Include(cart => cart.IdProductNavigation)
@@ -47,7 +47,7 @@ namespace Laptop_store_e_comerce.Controllers
             else return listCardDetails;
         }
         [HttpGet("iduser={id}/selected")]
-        public async Task<ActionResult<List<CartDetail>>> getSelectedCardDetailsByUser(int id)
+        public async Task<ActionResult<List<CartDetail>>> getSelectedCardDetailsByUser(string id)
         {
             if (!CartDetailsUserExist(id)) return NotFound();
             var list = await _context.CartDetails.Where(c => c.IdUser == id && c.Selected == 1).ToListAsync();
@@ -55,7 +55,7 @@ namespace Laptop_store_e_comerce.Controllers
             else return list;
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCardDetail(int id, CartDetail cardDetail)
+        public async Task<IActionResult> PutCardDetail(string id, CartDetail cardDetail)
         {
             if (id != cardDetail.IdUser)
             {
@@ -80,7 +80,7 @@ namespace Laptop_store_e_comerce.Controllers
             return NoContent();
         }
         [HttpGet("action={action}/iduser={value1}/idproduct={value2}/tongtien={value3}")]
-        public async Task<ActionResult<CartDetail>> PostCardDetail(string action,int value1 , string value2 , int value3)
+        public async Task<ActionResult<CartDetail>> PostCardDetail(string action,string value1 , string value2 , int value3)
         {
             if (action == "add")
             {
@@ -136,7 +136,7 @@ namespace Laptop_store_e_comerce.Controllers
             }
         }
         [HttpGet("select={select}/iduser={value1}/idproduct={value2}")]
-        public async Task<ActionResult<CartDetail>> selectCardItem(string select, int value1 , string value2)
+        public async Task<ActionResult<CartDetail>> selectCardItem(string select, string value1 , string value2)
         {
             var card = await _context.CartDetails.FirstOrDefaultAsync(c => c.IdUser == value1 && c.IdProduct == value2);
             if (card == null) return NotFound();
@@ -157,7 +157,7 @@ namespace Laptop_store_e_comerce.Controllers
         }
         
         [HttpDelete("iduser={value1}/idproduct={value2}")]
-        public async Task<ActionResult<CartDetail>> DeleteCardDetail(int value1 , string value2)
+        public async Task<ActionResult<CartDetail>> DeleteCardDetail(string value1 , string value2)
         {
             var cardDetail = await _context.CartDetails.FirstOrDefaultAsync(detail => detail.IdUser == value1 && detail.IdProduct == value2);
             if (cardDetail == null)
@@ -168,11 +168,11 @@ namespace Laptop_store_e_comerce.Controllers
             await _context.SaveChangesAsync();
             return cardDetail;
         }
-        private bool CartDetailsUserExist(int id)
+        private bool CartDetailsUserExist(string id)
         {
             return _context.CartDetails.Any(e => e.IdUser == id);
         }
-        private bool CartDetailItemExist(int a ,string b)
+        private bool CartDetailItemExist(string a ,string b)
         {
             return _context.CartDetails.Any(e => e.IdUser == a && e.IdProduct == b);
         }

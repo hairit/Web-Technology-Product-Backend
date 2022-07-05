@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Laptop_store_e_comerce.Models;
+using Laptop_store_e_comerce.Services;
+using Laptop_store_e_comerce.Repository;
 
 namespace Laptop_store_e_comerce.Controllers
 {
@@ -14,14 +16,16 @@ namespace Laptop_store_e_comerce.Controllers
     public class UserController : ControllerBase
     {
         private readonly StoreContext database;
+        UserRepository _userRepository;
+        private UserService userSer;
         public UserController(StoreContext context)
-        {database = context;}
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-        {return await database.Users.ToListAsync();}
-
+        {
+            database = context;
+            _userRepository = new UserRepository(context);
+            userSer = new UserService(_userRepository);
+        }
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserByID1(int id)
+        public async Task<ActionResult<User>> GetUserByID1(string id)
         {
             var user = await database.Users.Include(user => user.CartDetails)
                                 .ThenInclude(cart => cart.IdProductNavigation)
@@ -33,8 +37,24 @@ namespace Laptop_store_e_comerce.Controllers
             }
             return user;
         }
+        [HttpGet("test/{id}")]
+        public async Task<ActionResult<User>> GetUserByIDTest(string id)
+        {
+            if (id != null)
+            {
+               return await userSer.getUserById(id);
+            }
+            else return BadRequest();
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            //return await database.Users.ToListAsync();
+            if (userSer.getUsers().Count == 0) return NotFound();
+            else return userSer.getUsers();
+        }
         [HttpGet("id={id}")]
-        public async Task<ActionResult<List<User>>> GetUserByID2(int id)
+        public async Task<ActionResult<List<User>>> GetUserByID2(string id)
         {
             List<User> users = await database.Users.Include(user => user.CartDetails).Include(user => user.Bills).Where(user => user.Id == id).ToListAsync();
             if (users.Count == 0)
@@ -43,7 +63,6 @@ namespace Laptop_store_e_comerce.Controllers
             }
             return users;
         }
-        
         [HttpGet("name={value}")]
         public async Task<ActionResult<List<User>>> getUserByName(string value)
         {
@@ -121,7 +140,7 @@ namespace Laptop_store_e_comerce.Controllers
             catch (Exception e) { Console.WriteLine(e.ToString()); return BadRequest(); }
         }
         [HttpGet("customer/id={value}")]
-        public async Task<ActionResult<List<User>>> getCustomerByID(int value)
+        public async Task<ActionResult<List<User>>> getCustomerByID(string value)
         {
             try
             {
@@ -185,7 +204,7 @@ namespace Laptop_store_e_comerce.Controllers
             await database.SaveChangesAsync();
             return user;
         }
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
             return database.Users.Any(e => e.Id == id);
         }
@@ -199,6 +218,41 @@ namespace Laptop_store_e_comerce.Controllers
             String fullName2 = user.Lastname + " " + user.Firstname;
             if ((fullName.Contains(value) || fullName == value) || (fullName2.Contains(value) || fullName2 == value)) return true;
             return false;
+        }
+        private object loginValidate(string email,string pass)
+        {
+            bool result = true;
+            if(email == null || pass == null)  return "Email or password is empty";
+            
+            if (!email.Contains('@')) return "Email is must contain @ character";
+            else
+            {
+                if (email.Contains(' ')) return "Email is not allow to include";
+            }
+            if (!checkUppercase(pass)) return "Password must contain least 1 Uppercase character";
+            if (pass.Length < 8) return "Password must have least 8 character of length";
+            if (!checkCharacterIsNumber(pass)) return "Password must contain least 1 character is Number";
+            return result;
+        }
+        private bool checkUppercase(string pass)
+        {
+            bool result = false;
+            for(int i = 0; i < pass.Length; i++)
+            {
+                if (Char.IsUpper(pass[i])) result = true;
+                break;
+            }
+            return result;
+        }
+        private bool checkCharacterIsNumber(string pass)
+        {
+            bool result = false;
+            for(int i = 0;i < pass.Length; i++)
+            {
+                if (Char.IsDigit(pass[i])) result = true;
+                break;
+            }
+            return result;
         }
     }
 }

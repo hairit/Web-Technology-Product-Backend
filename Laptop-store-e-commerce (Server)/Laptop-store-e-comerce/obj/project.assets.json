@@ -7270,19 +7270,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tuong\\.nuget\\packages\\": {}
+    "C:\\Users\\Devsoft\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+      "projectUniqueName": "D:\\Personal Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
       "projectName": "Laptop-store-e-comerce",
-      "projectPath": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
-      "packagesPath": "C:\\Users\\tuong\\.nuget\\packages\\",
-      "outputPath": "D:\\Data\\Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
+      "projectPath": "D:\\Personal Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\Laptop-store-e-comerce.csproj",
+      "packagesPath": "C:\\Users\\Devsoft\\.nuget\\packages\\",
+      "outputPath": "D:\\Personal Project\\Web-Technology-Product-Backend\\Laptop-store-e-commerce (Server)\\Laptop-store-e-comerce\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Devsoft\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7351,45 +7351,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU3037",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Security.Cryptography.Cng 4.3.0' from source 'C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\': The repository primary signature validity period has expired.",
-      "libraryId": "System.Security.Cryptography.Cng"
-    },
-    {
-      "code": "NU3037",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl 4.3.0' from source 'C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\': The repository primary signature validity period has expired.",
-      "libraryId": "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl"
-    },
-    {
-      "code": "NU3037",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl 4.3.0' from source 'C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\': The repository primary signature validity period has expired.",
-      "libraryId": "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl"
-    },
-    {
-      "code": "NU3037",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple 4.3.0' from source 'C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\': The repository primary signature validity period has expired.",
-      "libraryId": "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple"
-    },
-    {
-      "code": "NU3037",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'runtime.native.System.Security.Cryptography.Apple 4.3.0' from source 'C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\': The repository primary signature validity period has expired.",
-      "libraryId": "runtime.native.System.Security.Cryptography.Apple"
-    }
-  ]
+  }
 }
